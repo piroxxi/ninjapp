@@ -1,0 +1,5 @@
+#default CSS file
+body{
+  color: red;
+  background: blue; # with these styles, at least you'll see imediatly if it works ^^
+}
