@@ -12,11 +12,6 @@ import etc.GreetingServiceImpl;
  */
 public class Module extends AbstractModule {
 
-    public Module() {
-        super();
-    }
-
-
     @Override
     protected void configure() {
         bind(GreetingService.class).to(GreetingServiceImpl.class);
