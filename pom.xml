@@ -7,7 +7,56 @@
 	<groupId>com.atolcd.ninjapp</groupId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<siteProjectVersion>${project.version}</siteProjectVersion>
+	</properties>
+
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+
+				<!--
+					This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the
+					Maven build itself.
+				-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-enforcer-plugin</artifactId>
+										<versionRange>[1.0,)</versionRange>
+										<goals>
+										  <goal>enforce</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
@@ -63,4 +112,49 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<!-- Do a license check by running : mvn -P license license:check -->
+		<!-- Update the license check by running : mvn -P license license:format -->
+		<profile>
+			<id>license</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.mycila.maven-license-plugin</groupId>
+						<artifactId>maven-license-plugin</artifactId>
+						<version>1.6.0</version>
+						<configuration>
+							<quiet>false</quiet>
+							<header>src/main/resources/license-header.txt</header>
+							<aggregate>true</aggregate>
+							<includes>
+								<include>**/src/**</include>
+								<include>**/pom.xml</include>
+							</includes>
+							<excludes>
+								<!-- ignore files produced during a build -->
+								<exclude>**/target/**</exclude>
+								<exclude>**/WEB-INF/classes/**</exclude>
+								<exclude>**/site/**</exclude>
+								<exclude>**/.DS_Store</exclude>
+
+								<!-- ignore binary files -->
+								<exclude>**/assets/**</exclude>
+								<exclude>**/views/**</exclude>
+							</excludes>
+							<useDefaultExcludes>false</useDefaultExcludes>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
 </project>
