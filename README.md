@@ -1,5 +1,5 @@
 ninjapp
 =======
 
-First Ninja App test
-test
+This is just a sandbox application, using Ninja<br/>
+http://www.ninjaframework.org/
